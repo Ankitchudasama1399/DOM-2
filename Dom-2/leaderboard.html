@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIN & MAX LEADERBOARD (DOM)</title>
+</head>
+<style>
+    .minmax {
+        display: flex;
+        gap: 350px;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    #min {
+        background-color: red;
+        width: 150px;
+        height: 110px;
+        border: 3px solid black;
+        font-size: 50px;
+        text-align: center;
+    }
+
+    #max {
+        background-color: green;
+        width: 150px;
+        height: 110px;
+        border: 3px solid black;
+        font-size: 50px;
+        text-align: center;
+    }
+
+    #score {
+        background-color: rgb(161, 168, 161);
+        width: 350px;
+        height: 140px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border: 3px solid black;
+        font-size: 80px;
+        text-align: center;
+    }
+
+    .text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 440px;
+    }
+
+    p {
+        font-size: 50px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .buttons {
+        width: 430px;
+        height: auto;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        padding: 45px;
+    }
+
+    button {
+        width: 130px;
+        height: 120px;
+        font-size: 50px;
+    }
+
+    .zero {
+        grid-column: 2 / 3;
+        grid-row: 4;
+        background-color: blueviolet;
+    }
+
+    #Ent {
+        grid-column: 3 / 3;
+        grid-row: 5;
+        width: 350px;
+        background-color: black;
+        color: white;
+        margin: 0px 0px 0px -260px;
+    }
+</style>
+
+<body>
+
+    <div class="minmax">
+        <div id="min">
+            100
+        </div>
+
+        <div id="max">
+            200
+        </div>
+    </div>
+    <div class="text">
+        <h1 class="first">MIN</h1>
+        <h1 class="second">MAX</h1>
+    </div>
+
+    <p>score</p>
+
+    <h2 id="score"></h2>
+
+
+
+    <div class="buttons">
+        <button style="background-color: green;">1</button>
+        <button style="background-color: orangered;">2</button>
+        <button style="background-color: green;">3</button>
+        <button style="background-color: orangered;">4</button>
+        <button style="background-color: orangered;">5</button>
+        <button style="background-color: orangered;">6</button>
+        <button style="background-color: green;">7</button>
+        <button style="background-color: orangered;">8</button>
+        <button style="background-color: green;">9</button>
+        <button class="zero">0</button>
+        <button onclick="calculate()" id="Ent">Enter</button>
+
+    </div>
+
+
+</body>
+<script>
+
+    let bag = "";
+    let btns = document.querySelectorAll(".buttons > button");
+    let displayScore = document.querySelector("#score")
+
+
+    btns.forEach((buttons, index) => {
+
+        if (index < btns.length - 1) {
+            buttons.addEventListener("click", function () {
+                bag += buttons.textContent
+                displayScore.textContent = bag
+            })
+        }
+
+    })
+
+    let minElement = document.getElementById("min");
+    let maxElement = document.getElementById("max");
+
+    function calculate() {
+        console.log(minElement.textContent, maxElement.textContent);
+
+        if (+bag < +minElement.textContent) {
+            minElement.textContent = bag;
+            displayScore.textContent = "";
+        }
+
+        else if (+bag > +maxElement.textContent) {
+            maxElement.textContent = bag;
+            displayScore.textContent = "";
+        }
+        bag = "";
+        displayScore.textContent = "";
+    }
+</script>
+
+</html>
